@@ -26,4 +26,5 @@ test {
 	useJUnitPlatform()
 }
 
-task stage(dependsOn: ['clean', 'installDist'])
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
