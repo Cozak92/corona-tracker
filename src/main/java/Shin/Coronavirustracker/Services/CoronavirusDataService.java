@@ -27,14 +27,6 @@ public class CoronavirusDataService {
         return allStats;
     }
 
-    public Map<String, Integer> getNowStore() {
-        return nowStore;
-    }
-
-    public Map<String, Integer> getPreStore() {
-        return preStore;
-    }
-
     private LocationStats locationStats;
 
 
@@ -104,13 +96,9 @@ public class CoronavirusDataService {
     }
 
     public int TotalCases(){
-        int result = 0;
-        result = allStats.stream().mapToInt(stat -> stat.getLatestTotal()).sum();
-        return result;
+        return allStats.stream().mapToInt(stat -> stat.getLatestTotal()).sum();
     }
     public int totalNewCases(){
-        int result = 0;
-        result = allStats.stream().mapToInt(stat -> stat.getDiffFromPrevDay()).sum();
-        return result;
+        return allStats.stream().mapToInt(stat -> stat.getDiffFromPrevDay()).sum();
     }
 }

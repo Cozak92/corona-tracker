@@ -3,8 +3,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>CoronaVirus Tracker</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Covid-19 Tracker</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
 </head>
 
@@ -28,13 +31,45 @@
     </p>
 </div>
 
-    <form method="post">
-        <input class="form-control form-control-lg" name = "search" type ="text" placeholder="Search....">
-    </form>
+    <table  data-sort-class="table-active"
+            data-sortable="true"
+            id="table"
+            data-search="true"
+            data-pagination="true"
+            data-toggle="table"
+            class="table table-striped">
+        <caption>List of Countries</caption>
+        <thead class="thead-dark">
+        <tr>
+            <th data-field="country" data-sortable="true" data-sort-name="country">Country</th>
+            <th data-sortable="true">Total cases reported</th>
+            <th data-sortable="true">Changes since last day</th>
 
-    <table th:replace="contents :: content_1"></table>
+        </tr>
+        </thead>
+        <tr th:each="locationStat : ${locationStats}">
+            <td th:text="${locationStat.country}" th:onclick="'window.location.href = \'' + @{https://www.google.com/search?q={country}+covid+19(country=${locationStat.country})} + '\''" ></td>
+            <td th:text="${locationStat.latestTotal}">0</td>
+            <td th:text="${locationStat.diffFromPrevDay}">0</td>
+        </tr>
+
+
+
+    </table>
     </div>
 
+    <script
+            src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+        $('#table').on('click-row.bs.table', function (e, row, $element) {
+            window.open(`https://www.google.com/search?q=${row.country}+covid+19`)
+        });
+    </script>
 </body>
 
 </html>
