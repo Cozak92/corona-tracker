@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CoronaVirus Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+</head>
+
+<body>
+<div class="container">
+
+    <a href = "/">
+        <h1>Covid-19 Tracker</h1>
+    </a>
+<P>This page lists the current number of cases reported across the global</P>
+
+<div class="jumbotron">
+    <div>
+        <h1 class="display-4" th:text="${totalReportedCases}"></h1>
+    </div>
+    <p class="lead">Total cases reported as of today</p>
+    <hr class="my-4">
+    <p>
+        <span> Global new cases since last day : </span>
+        <span th:text="${newCases}"></span>
+    </p>
+</div>
+
+    <form method="post">
+        <input class="form-control form-control-lg" name = "search" type ="text" placeholder="Search....">
+    </form>
+
+    <table th:replace="contents :: content_1"></table>
+    </div>
+
+</body>
+
+</html>
